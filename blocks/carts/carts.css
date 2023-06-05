@@ -1,0 +1,7 @@
+.carts {
+    padding-top: 50px;
+    display: grid;
+    row-gap: 20px;
+    column-gap: 17px;
+    grid-template-columns: repeat(auto-fill, 282px);
+}

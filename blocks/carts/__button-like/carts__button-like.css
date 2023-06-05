@@ -1,0 +1,7 @@
+.carts__button-like {
+    
+    display: flex;
+    align-items: center;
+    grid-row: 2;
+    grid-column: 3;
+}

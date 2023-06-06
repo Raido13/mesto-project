@@ -1,8 +1,9 @@
 .carts__like-switcher {
-    width: 10px;
-    height: 10px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
     grid-area: 1 / -1 / 1 / -1;
-    visibility: hidden;
+    clip-path: inset(0 0 0 0);
 }
 
 .carts__like-switcher:checked ~ .carts__button-like-icon {

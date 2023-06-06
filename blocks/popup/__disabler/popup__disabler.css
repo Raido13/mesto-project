@@ -1,6 +1,7 @@
 .popup__disabler {
-    width: 10px;
-    height: 10px;
-    visibility: hidden;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    clip-path: inset(0 0 0 0);
     grid-area: 1 / -1 / 1 / -1;
 }

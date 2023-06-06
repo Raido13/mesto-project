@@ -8,6 +8,12 @@
 @media screen and (max-width: 880px) {
     .footer {
         padding-top: 48px;
-        grid-template-columns: 1fr 282px 2fr;
+        grid-template-columns: 1fr 282px 3fr;
+    }
+}
+
+@media screen and (max-width: 580px) {
+    .footer {
+        grid-template-columns: 1fr 282px 1fr;
     }
 }

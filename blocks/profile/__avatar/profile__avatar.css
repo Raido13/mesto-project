@@ -5,6 +5,12 @@
     grid-column: 1;
 }
 
+@media screen and (max-width: 879px) {
+    .profile__avatar {
+        grid-column: 2;
+    }
+}
+
 @media screen and (max-width: 768px) {
     .profile__avatar {
         grid-column: 2;

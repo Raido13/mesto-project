@@ -4,3 +4,10 @@
     fill: #fff;
     grid-area: 1 / -1 / 1 / -1;
 }
+
+@media screen and (max-width: 768px) {
+    .popup__button-close-icon {
+        width: 20px;
+        height: 20px;
+    }
+}

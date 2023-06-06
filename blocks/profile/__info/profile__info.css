@@ -9,6 +9,12 @@
     grid-column: 3;
 }
 
+@media screen and (max-width: 879px) {
+    .profile__info {
+        grid-column: 4;
+    }
+}
+
 @media screen and (max-width: 768px) {
     .profile__info {
         grid-template-columns: 1fr 18px;

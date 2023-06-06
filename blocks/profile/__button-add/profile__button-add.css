@@ -13,6 +13,12 @@
     opacity: .6;
 }
 
+@media screen and (max-width: 879px) {
+    .profile__button-add {
+        grid-column: 6;
+    }
+}
+
 @media screen and (max-width: 768px) {
     .profile__button-add {
         width: 282px;

@@ -5,6 +5,12 @@
     grid-template-columns: 120px 30px 336px 1fr 150px;
 }
 
+@media screen and (max-width: 879px) {
+    .profile {
+        grid-template-columns: 27px 120px 30px 336px 1fr 150px 27px;
+    }
+}
+
 @media screen and (max-width: 768px) {
     .profile {
         padding-top: 42px;

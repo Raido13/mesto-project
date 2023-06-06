@@ -1,0 +1,10 @@
+.carts__like-switcher {
+    width: 10px;
+    height: 10px;
+    grid-area: 1 / -1 / 1 / -1;
+    visibility: hidden;
+}
+
+.carts__like-switcher:checked ~ .carts__button-like-icon {
+    background-image: url(../../../image/carts__like_filled@2x.png);
+}

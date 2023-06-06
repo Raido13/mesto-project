@@ -4,3 +4,12 @@
     align-items: center;
     grid-template-columns: 120px 30px 336px 1fr 150px;
 }
+
+@media screen and (max-width: 768px) {
+    .profile {
+        padding-top: 42px;
+        grid-template-columns: 1fr 282px 1fr;
+        grid-template-rows: 120px 26px 54px 36px 50px;
+        justify-items: center;
+    }
+}

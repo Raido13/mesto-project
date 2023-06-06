@@ -1,7 +1,11 @@
 .carts {
+    max-width: 880px;
+    width: 100vw;
     padding-top: 50px;
     display: grid;
     row-gap: 20px;
     column-gap: 17px;
-    grid-template-columns: repeat(auto-fill, 282px);
+    justify-content: center;
+    grid-template-rows: repeat(auto-fit, 361px);
+    grid-template-columns: repeat(auto-fit, 282px);
 }

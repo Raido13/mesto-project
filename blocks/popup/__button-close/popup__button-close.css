@@ -1,0 +1,14 @@
+.popup__button-close {
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    top: -40px;
+    right: -40px;
+}
+
+.popup__button-close:hover {
+    opacity: .6;
+}

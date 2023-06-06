@@ -1,6 +1,6 @@
-.profile__button-edit-icon {
+.popup__disabler {
     width: 10px;
     height: 10px;
-    fill: #fff;
+    visibility: hidden;
     grid-area: 1 / -1 / 1 / -1;
 }

@@ -8,3 +8,7 @@
     box-sizing: border-box;
     grid-column: 5;
 }
+
+.profile__button-add:hover {
+    opacity: .6;
+}

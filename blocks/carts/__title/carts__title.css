@@ -1,9 +1,13 @@
 .carts__title {
     margin: 0;
+    max-width: 200px;
     font-size: 24px;
     line-height: 29px;
     font-weight: 900;
     color: #000;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
     padding: 25px 0 25px;
     grid-row: 2;
     grid-column: 2;

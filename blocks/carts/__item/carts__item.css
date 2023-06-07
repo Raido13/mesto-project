@@ -1,5 +1,5 @@
 .carts__item {
-    max-width: 282px;
+    width: 282px;
     border-radius: 10px;
     background-color: #fff;
     display: grid;

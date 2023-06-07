@@ -3,9 +3,8 @@
     min-width: 320px;
     width: 100vw;
     padding-bottom: 40px;
-    border-bottom: 1px solid #545454;
+    border-bottom: 1px solid rgba(84, 84, 84, .7);
     box-sizing: border-box;
-    line-height: 0;
 }
 
 @media screen and (max-width: 879px) {

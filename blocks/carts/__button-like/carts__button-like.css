@@ -1,14 +1,17 @@
 .carts__button-like {
     width: 22px;
     height: 19px;
-    display: grid;
-    align-items: center;
-    justify-items: center;
+    border: none;
+    background-color: transparent;
+    background-image: url(../../../images/carts__like@2x.png);
+    background-size: 22px 19px;
+    background-repeat: no-repeat;
+    background-position: center;
     grid-row: 2;
     grid-column: 3;
     cursor: pointer;
 }
 
 .carts__button-like:hover {
-    opacity: .6;
+    opacity: .5;
 }

@@ -1,4 +1,5 @@
 .profile__description {
+    max-width: 336px;
     margin: 0;
     font-size: 18px;
     line-height: 22px;
@@ -6,10 +7,14 @@
     grid-column: span 2;
     grid-row: 2;
     color: #fff;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 @media screen and (max-width: 768px) {
     .profile__description {
+        max-width: 282px;
         font-size: 14px;
         line-height: 17px;
         text-align: center;

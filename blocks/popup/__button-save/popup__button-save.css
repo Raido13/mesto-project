@@ -8,9 +8,9 @@
     color: #fff;
     background-color: #000;
     cursor: pointer;
-    margin-top: 48px;
-    border: 0;
+    border: none;
     border-radius: 2px;
+    grid-row: 6;
 }
 
 .popup__button-save:hover {
@@ -21,6 +21,5 @@
     .popup__button-save {
         font-size: 14px;
         line-height: 17px;
-        margin-top: 45px;
     }
 }

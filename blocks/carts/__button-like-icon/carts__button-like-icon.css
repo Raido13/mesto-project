@@ -1,8 +1,0 @@
-.carts__button-like-icon {
-    width: 22px;
-    height: 19px;
-    background-image: url(../../../images/carts__like@2x.png);
-    background-repeat: no-repeat;
-    background-size: contain;
-    grid-area: 1 / -1 / 1 / -1;
-}

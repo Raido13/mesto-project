@@ -9,3 +9,9 @@
     grid-template-rows: repeat(auto-fit, 361px);
     grid-template-columns: repeat(auto-fit, 282px);
 }
+
+@media screen and (max-width: 768px) {
+    .carts {
+        padding-top: 36px;
+    }
+}

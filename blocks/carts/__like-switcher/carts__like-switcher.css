@@ -7,6 +7,6 @@
 }
 
 .carts__like-switcher:checked ~ .carts__button-like-icon {
-    background-image: url(../../../image/carts__like_filled@2x.png);
+    background-image: url(../../../images/carts__like_filled@2x.png);
     background-repeat: no-repeat;
 }

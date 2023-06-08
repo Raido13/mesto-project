@@ -1,9 +1,10 @@
 .carts__button-like {
     width: 22px;
     height: 19px;
+    padding: 0;
     border: none;
     background-color: transparent;
-    background-image: url(../../../images/carts__like@2x.png);
+    background-image: url(../../../images/carts__like.svg);
     background-size: 22px 19px;
     background-repeat: no-repeat;
     background-position: center;

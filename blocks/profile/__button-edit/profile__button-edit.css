@@ -1,12 +1,13 @@
 .profile__button-edit {
     width: 24px;
     height: 24px;
+    padding: 0;
     border: 1px solid #fff;
     box-sizing: border-box;
     grid-column: 2;
     cursor: pointer;
     background-color: transparent;
-    background-image: url(../../../images/profile__edit.png);
+    background-image: url(../../../images/profile__edit.svg);
     background-size: 10px 10px;
     background-repeat: no-repeat;
     background-position: center;

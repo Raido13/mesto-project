@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Место</title>
     <link rel="stylesheet" href="pages/index.css">
+    <script src="script.js" defer></script>
 </head>
 <body class="root">
     <div class="page">
@@ -16,43 +17,13 @@
             <section class="profile">
                 <img src="images/avatar__default@2x.jpg" alt="Имя пользователя" class="profile__avatar">
                 <div class="profile__info">
-                    <h1 class="profile__name">Жак-Ив Кусто</h1>
+                    <h1 class="profile__name">${userName.value}</h1>
                     <button class="profile__button-edit" type="button"></button>
-                    <p class="profile__description">Исследователь океана</p>
+                    <p class="profile__description">${userDescription.value}</p>
                 </div>
                 <button class="profile__button-add" type="button"></button>
             </section>
             <section class="carts">
-                <div class="carts__item">
-                    <img src="images/carts__church@2x.jpg" alt="Карачаевск" class="carts__image">
-                    <h2 class="carts__title">Карачаевск</h2>
-                    <button class="carts__button-like" type="button"></button>
-                </div>
-                <div class="carts__item">
-                    <img src="images/carts__hill@2x.jpg" alt="Гора Эльбрус" class="carts__image">
-                    <h2 class="carts__title">Гора Эльбрус</h2>
-                    <button class="carts__button-like" type="button"></button>
-                </div>
-                <div class="carts__item">
-                    <img src="images/carts__mountain@2x.jpg" alt="Домбай" class="carts__image">
-                    <h2 class="carts__title">Домбай</h2>
-                    <button class="carts__button-like" type="button"></button>
-                </div>
-                <div class="carts__item">
-                    <img src="images/carts__hill@2x.jpg" alt="Гора Эльбрус" class="carts__image">
-                    <h2 class="carts__title">Гора Эльбрус</h2>
-                    <button class="carts__button-like" type="button"></button>
-                </div>
-                <div class="carts__item">
-                    <img src="images/carts__mountain@2x.jpg" alt="Домбай" class="carts__image">
-                    <h2 class="carts__title">Домбай</h2>
-                    <button class="carts__button-like" type="button"></button>
-                </div>
-                <div class="carts__item">
-                    <img src="images/carts__church@2x.jpg" alt="Карачаево-Черкессия" class="carts__image">
-                    <h2 class="carts__title">Карачаево-Черкессия</h2>
-                    <button class="carts__button-like" type="button"></button>
-                </div>
             </section>
         </main>
         <footer class="footer">
@@ -70,5 +41,12 @@
             </div>
         </div>
     </div>
+    <template id="cart-template">
+        <div class="carts__item">
+            <img src="" alt="" class="carts__image">
+            <h2 class="carts__title"></h2>
+            <button class="carts__button-like" type="button"></button>
+        </div>
+    </template>
 </body>
 </html>

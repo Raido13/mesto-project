@@ -1,0 +1,19 @@
+.carts__button-trash{
+    width: 18px;
+    height: 19px;
+    padding: 0;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: transparent;
+    background-image: url(../../../images/carts__trash.svg);
+    background-size: 18px 19px;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    cursor: pointer;
+}
+
+.carts__button-trash:hover {
+    opacity: .6;
+}

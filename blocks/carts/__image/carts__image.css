@@ -7,4 +7,5 @@
     grid-row: 1;
     grid-column: 1 / -1;
     object-fit: cover;
+    cursor: pointer;
 }

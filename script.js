@@ -19,19 +19,19 @@ userDescription.textContent = 'Исследователь океана';
 userEditName.value = 'Жак-Ив Кусто';
 userEditDescription.value = 'Исследователь океана';
 
-const formElement = document.querySelector('.popup__form');
+const popupUserForm = document.querySelector('.popup__form');
 
-function handleFormSubmit(evt){
+function popupUserFormSubmit(evt){
     evt.preventDefault();
     userName.textContent = userEditName.value;
     userDescription.textContent = userEditDescription.value;
     popupToggle();
 }
 
-formElement.addEventListener('submit', handleFormSubmit);
+popupUserForm.addEventListener('submit', popupUserFormSubmit);
 
 const carts = document.querySelector('.carts');
-const initialCards = [
+const initialCarts = [
     {
         name: 'Карачаевск',
         imgLink: 'images/carts__church@2x.jpg'
@@ -58,30 +58,77 @@ const initialCards = [
     },
 ]
 
-function addCart (){
+function addCart (item){
     const cartTemplate = document.querySelector('#cart-template').content;
     const cartElement = cartTemplate.querySelector('.carts__item').cloneNode(true);
+    const cartTrashButton = cartElement.querySelector('.carts__button-trash');
     const cartLikeButton = cartElement.querySelector('.carts__button-like');
     const cartTitle = cartElement.querySelector('.carts__title');
     const cartImage = cartElement.querySelector('.carts__image');
     
-    if (!addCart.counter){
-        addCart.counter = 0;
-    }
-    cartTitle.textContent = initialCards[addCart.counter].name;
-    cartImage.setAttribute('src', initialCards[addCart.counter].imgLink);
+    cartTitle.textContent = item.name;
+    cartImage.setAttribute('src', item.imgLink);
+    cartImage.setAttribute('alt', item.name);
 
     cartLikeButton.addEventListener('click', evt=>{
         cartLikeButton.classList.toggle('carts__button-like_active');
     });
 
+    cartTrashButton.addEventListener('click', evt=>{
+        cartTrashButton.parentElement.remove();
+    });
+
+    cartImage.addEventListener('click', evt=>{
+        const photoView = document.querySelector('.photo-view');        
+        const photoViewClose = document.querySelector('.photo-view__button-close');
+        const photoViewImage = document.querySelector('.photo-view__image');
+        const photoViewTitle = document.querySelector('.photo-view__title');
+        
+        photoView.classList.add('photo-view_opened');
+        photoViewTitle.textContent = item.name;
+        photoViewImage.setAttribute('src', item.imgLink);
+        photoViewImage.setAttribute('alt', item.name);
+
+        photoViewClose.addEventListener('click', evt=>{
+            photoView.classList.remove('photo-view_opened');
+        });
+    });
+    
     carts.append(cartElement);
-    addCart.counter += 1;
 }
 
-addCart();
-addCart();
-addCart();
-addCart();
-addCart();
-addCart();
+initialCarts.forEach(item=>{
+    addCart (item);
+});
+
+const profileAddButton = document.querySelector('.profile__button-add');
+const popupCreater = document.querySelector('.popup-creater');
+const popupCreaterClose = document.querySelector('.popup-creater__button-close');
+
+function popupCreaterToggle (){
+    popupCreater.classList.toggle('popup-creater_opened');
+}
+
+profileAddButton.addEventListener('click', popupCreaterToggle);
+popupCreaterClose.addEventListener('click', popupCreaterToggle);
+
+const popupPlaceForm = document.querySelector('.popup-creater__form');
+const popupPlaceName = document.querySelector('.popup-creater__field_place_name');
+const popupPlaceImage = document.querySelector('.popup-creater__field_place_image');
+
+function popupPlaceFormSubmit(evt){
+    evt.preventDefault();
+    const newObj = {};
+
+    newObj.name = popupPlaceName.value;
+    newObj.imgLink = popupPlaceImage.value;
+    initialCarts.unshift(newObj)
+
+    addCart (initialCarts[0]);
+    popupCreaterToggle();
+
+    popupPlaceName.value = '';
+    popupPlaceImage.value = '';
+}
+
+popupPlaceForm.addEventListener('submit', popupPlaceFormSubmit);

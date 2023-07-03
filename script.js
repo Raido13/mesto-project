@@ -2,22 +2,28 @@ const profileEditButton = document.querySelector('.profile__button-edit');
 const popup = document.querySelector('.popup');
 const popupClose = document.querySelector('.popup__button-close');
 
+const userName = document.querySelector('.profile__name');
+const userDescription = document.querySelector('.profile__description');
+const userEditName = document.querySelector('.popup__field_user_name');
+const userEditDescription = document.querySelector('.popup__field_user_description');
+
 function popupToggle (){
+    if (!popupToggle.counter){
+        popupToggle.counter = 0;
+    }
+    if (popupToggle.counter == 1){
+        userEditName.value = '';
+        userEditDescription.value = '';
+    }
+    popupToggle.counter ++;
     popup.classList.toggle('popup_opened');
 }
 
 profileEditButton.addEventListener('click', popupToggle);
 popupClose.addEventListener('click', popupToggle);
 
-const userName = document.querySelector('.profile__name');
-const userDescription = document.querySelector('.profile__description');
-const userEditName = document.querySelector('.popup__field_user_name');
-const userEditDescription = document.querySelector('.popup__field_user_description');
-
-userName.textContent = 'Жак-Ив Кусто';
-userDescription.textContent = 'Исследователь океана';
-userEditName.value = 'Жак-Ив Кусто';
-userEditDescription.value = 'Исследователь океана';
+userEditName.value = userName.textContent;
+userEditDescription.value = userDescription.textContent;
 
 const popupUserForm = document.querySelector('.popup__form');
 
@@ -25,6 +31,8 @@ function popupUserFormSubmit(evt){
     evt.preventDefault();
     userName.textContent = userEditName.value;
     userDescription.textContent = userEditDescription.value;
+    userEditName.value = '';
+    userEditDescription.value = '';
     popupToggle();
 }
 

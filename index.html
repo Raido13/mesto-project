@@ -40,10 +40,29 @@
                 </form>
             </div>
         </div>
+        <div class="popup-creater">
+            <div class="popup-creater__container">
+                <button class="popup-creater__button-close" type="button"></button>
+                <h2 class="popup-creater__title">Новое место</h2>
+                <form class="popup-creater__form" name="cartAdd">
+                    <input type="text" placeholder="Название" class="popup-creater__field popup-creater__field_place_name" name="placeName">
+                    <input type="text" placeholder="Ссылка на картинку" class="popup-creater__field  popup-creater__field_place_image" name="placeImage">
+                    <button type="submit" class="popup-creater__button-save">Сохранить</button>
+                </form>
+            </div>
+        </div>
+        <div class="photo-view">
+            <div class="photo-view__container">
+                <button class="photo-view__button-close" type="button"></button>
+                <img class="photo-view__image">
+                <h2 class="photo-view__title"></h2>
+            </div>
+        </div>
     </div>
     <template id="cart-template">
         <div class="carts__item">
-            <img src="" alt="" class="carts__image">
+            <img class="carts__image">
+            <button class="carts__button-trash" type="button"></button>
             <h2 class="carts__title"></h2>
             <button class="carts__button-like" type="button"></button>
         </div>

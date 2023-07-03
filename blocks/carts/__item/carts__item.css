@@ -5,4 +5,5 @@
     display: grid;
     grid-template-columns: 20px 1fr 22px 20px;
     align-items: center;
+    position: relative;
 }

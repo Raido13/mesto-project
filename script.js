@@ -7,23 +7,20 @@ const userDescription = document.querySelector('.profile__description');
 const userEditName = document.querySelector('.popup__field_user_name');
 const userEditDescription = document.querySelector('.popup__field_user_description');
 
-function popupToggle (){
-    if (!popupToggle.counter){
-        popupToggle.counter = 0;
-    }
-    if (popupToggle.counter == 1){
-        userEditName.value = '';
-        userEditDescription.value = '';
-    }
-    popupToggle.counter ++;
-    popup.classList.toggle('popup_opened');
+function popupUserOpen (){
+    popup.classList.add('popup_opened');
 }
-
-profileEditButton.addEventListener('click', popupToggle);
-popupClose.addEventListener('click', popupToggle);
+function popupUserClose (){
+    userEditName.value = '';
+    userEditDescription.value = '';
+    popup.classList.remove('popup_opened');
+}
 
 userEditName.value = userName.textContent;
 userEditDescription.value = userDescription.textContent;
+
+profileEditButton.addEventListener('click', popupUserOpen);
+popupClose.addEventListener('click', popupUserClose);
 
 const popupUserForm = document.querySelector('.popup__form');
 
@@ -31,9 +28,7 @@ function popupUserFormSubmit(evt){
     evt.preventDefault();
     userName.textContent = userEditName.value;
     userDescription.textContent = userEditDescription.value;
-    userEditName.value = '';
-    userEditDescription.value = '';
-    popupToggle();
+    popupUserClose();
 }
 
 popupUserForm.addEventListener('submit', popupUserFormSubmit);
@@ -66,7 +61,7 @@ const initialCarts = [
     },
 ]
 
-function addCart (item){
+function addCart (item ,placement){
     const cartTemplate = document.querySelector('#cart-template').content;
     const cartElement = cartTemplate.querySelector('.carts__item').cloneNode(true);
     const cartTrashButton = cartElement.querySelector('.carts__button-trash');
@@ -102,11 +97,12 @@ function addCart (item){
         });
     });
     
-    carts.append(cartElement);
+    carts[placement](cartElement);
 }
 
 initialCarts.forEach(item=>{
-    addCart (item);
+    const placement = 'append';
+    addCart (item, placement);
 });
 
 const profileAddButton = document.querySelector('.profile__button-add');
@@ -127,12 +123,13 @@ const popupPlaceImage = document.querySelector('.popup-creater__field_place_imag
 function popupPlaceFormSubmit(evt){
     evt.preventDefault();
     const newObj = {};
+    const placement = 'prepend';
 
     newObj.name = popupPlaceName.value;
     newObj.imgLink = popupPlaceImage.value;
-    initialCarts.unshift(newObj)
+    initialCarts.unshift(newObj);
 
-    addCart (initialCarts[0]);
+    addCart (initialCarts[0], placement);
     popupCreaterToggle();
 
     popupPlaceName.value = '';

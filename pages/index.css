@@ -42,7 +42,7 @@
 @import url(../blocks/popup-creater/__title/popup-creater__title.css);
 @import url(../blocks/popup-creater/__form/popup-creater__form.css);
 @import url(../blocks/popup-creater/__field/popup-creater__field.css);
-@import url(../blocks/popup-creater/__button-save/popup-creater__button-save.css);
+@import url(../blocks/popup-creater/__button-create/popup-creater__button-create.css);
 @import url(../blocks/popup-creater/_opened/popup-creater_opened.css);
 
 @import url(../blocks/photo-view/photo-view.css);

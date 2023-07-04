@@ -64,7 +64,7 @@ const initialCarts = [
 function deleteCart (item){
     const indexToDelete = initialCarts.findIndex(it => it === item);
     initialCarts.splice(indexToDelete, 1);
-    renderCartsByUser();
+    renderCartsByUserAction();
 }
 
 function renderCarts (item){
@@ -106,7 +106,7 @@ function renderCarts (item){
 
 initialCarts.forEach(renderCarts);
 
-const renderCartsByUser = ()=>{
+function renderCartsByUserAction (){
     document.querySelectorAll('.carts__item').forEach(it=> it.remove());
     initialCarts.forEach(renderCarts);
 }
@@ -131,7 +131,7 @@ function submitPopupPlaceForm(evt){
     const newObj = {name: popupPlaceName.value, imgLink: popupPlaceImage.value};
     initialCarts.unshift(newObj);
 
-    renderCartsByUser();
+    renderCartsByUserAction();
     togglePopupCreater();
 
     popupPlaceName.value = '';

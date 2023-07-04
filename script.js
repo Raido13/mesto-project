@@ -7,10 +7,10 @@ const userDescription = document.querySelector('.profile__description');
 const userEditName = document.querySelector('.popup__field_user_name');
 const userEditDescription = document.querySelector('.popup__field_user_description');
 
-function popupUserOpen (){
+function openPopupUser (){
     popup.classList.add('popup_opened');
 }
-function popupUserClose (){
+function closePopupUser (){
     userEditName.value = '';
     userEditDescription.value = '';
     popup.classList.remove('popup_opened');
@@ -19,19 +19,19 @@ function popupUserClose (){
 userEditName.value = userName.textContent;
 userEditDescription.value = userDescription.textContent;
 
-profileEditButton.addEventListener('click', popupUserOpen);
-popupClose.addEventListener('click', popupUserClose);
+profileEditButton.addEventListener('click', openPopupUser);
+popupClose.addEventListener('click', closePopupUser);
 
 const popupUserForm = document.querySelector('.popup__form');
 
-function popupUserFormSubmit(evt){
+function submitPopupUserForm(evt){
     evt.preventDefault();
     userName.textContent = userEditName.value;
     userDescription.textContent = userEditDescription.value;
-    popupUserClose();
+    closePopupUser();
 }
 
-popupUserForm.addEventListener('submit', popupUserFormSubmit);
+popupUserForm.addEventListener('submit', submitPopupUserForm);
 
 const carts = document.querySelector('.carts');
 const initialCarts = [
@@ -108,18 +108,18 @@ const profileAddButton = document.querySelector('.profile__button-add');
 const popupCreater = document.querySelector('.popup-creater');
 const popupCreaterClose = document.querySelector('.popup-creater__button-close');
 
-function popupCreaterToggle (){
+function togglePopupCreater (){
     popupCreater.classList.toggle('popup-creater_opened');
 }
 
-profileAddButton.addEventListener('click', popupCreaterToggle);
-popupCreaterClose.addEventListener('click', popupCreaterToggle);
+profileAddButton.addEventListener('click', togglePopupCreater);
+popupCreaterClose.addEventListener('click', togglePopupCreater);
 
 const popupPlaceForm = document.querySelector('.popup-creater__form');
 const popupPlaceName = document.querySelector('.popup-creater__field_place_name');
 const popupPlaceImage = document.querySelector('.popup-creater__field_place_image');
 
-function popupPlaceFormSubmit(evt){
+function submitPopupPlaceForm(evt){
     evt.preventDefault();
     const newObj = {};
     
@@ -128,10 +128,10 @@ function popupPlaceFormSubmit(evt){
     initialCarts.unshift(newObj);
 
     addCart (initialCarts[0], 'prepend');
-    popupCreaterToggle();
+    togglePopupCreater();
 
     popupPlaceName.value = '';
     popupPlaceImage.value = '';
 }
 
-popupPlaceForm.addEventListener('submit', popupPlaceFormSubmit);
+popupPlaceForm.addEventListener('submit', submitPopupPlaceForm);

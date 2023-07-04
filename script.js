@@ -101,8 +101,7 @@ function addCart (item ,placement){
 }
 
 initialCarts.forEach(item=>{
-    const placement = 'append';
-    addCart (item, placement);
+    addCart (item, 'append');
 });
 
 const profileAddButton = document.querySelector('.profile__button-add');
@@ -123,13 +122,12 @@ const popupPlaceImage = document.querySelector('.popup-creater__field_place_imag
 function popupPlaceFormSubmit(evt){
     evt.preventDefault();
     const newObj = {};
-    const placement = 'prepend';
-
+    
     newObj.name = popupPlaceName.value;
     newObj.imgLink = popupPlaceImage.value;
     initialCarts.unshift(newObj);
 
-    addCart (initialCarts[0], placement);
+    addCart (initialCarts[0], 'prepend');
     popupCreaterToggle();
 
     popupPlaceName.value = '';

@@ -61,7 +61,13 @@ const initialCarts = [
     },
 ]
 
-function addCart (item ,placement){
+function deleteCart (item){
+    const indexToDelete = initialCarts.findIndex(it => it === item);
+    initialCarts.splice(indexToDelete, 1);
+    renderCartsByUser();
+}
+
+function renderCarts (item){
     const cartTemplate = document.querySelector('#cart-template').content;
     const cartElement = cartTemplate.querySelector('.carts__item').cloneNode(true);
     const cartTrashButton = cartElement.querySelector('.carts__button-trash');
@@ -73,12 +79,10 @@ function addCart (item ,placement){
     cartImage.setAttribute('src', item.imgLink);
     cartImage.setAttribute('alt', item.name);
 
-    cartLikeButton.addEventListener('click', evt=>{
-        cartLikeButton.classList.toggle('carts__button-like_active');
-    });
+    cartLikeButton.addEventListener('click', evt=> cartLikeButton.classList.toggle('carts__button-like_active'));
 
-    cartTrashButton.addEventListener('click', evt=>{
-        cartTrashButton.parentElement.remove();
+    cartTrashButton.addEventListener('click', evt=> {
+        deleteCart(item);
     });
 
     cartImage.addEventListener('click', evt=>{
@@ -97,12 +101,15 @@ function addCart (item ,placement){
         });
     });
     
-    carts[placement](cartElement);
+    carts.append(cartElement);
 }
 
-initialCarts.forEach(item=>{
-    addCart (item, 'append');
-});
+initialCarts.forEach(renderCarts);
+
+const renderCartsByUser = ()=>{
+    document.querySelectorAll('.carts__item').forEach(it=> it.remove());
+    initialCarts.forEach(renderCarts);
+}
 
 const profileAddButton = document.querySelector('.profile__button-add');
 const popupCreater = document.querySelector('.popup-creater');
@@ -121,13 +128,10 @@ const popupPlaceImage = document.querySelector('.popup-creater__field_place_imag
 
 function submitPopupPlaceForm(evt){
     evt.preventDefault();
-    const newObj = {};
-    
-    newObj.name = popupPlaceName.value;
-    newObj.imgLink = popupPlaceImage.value;
+    const newObj = {name: popupPlaceName.value, imgLink: popupPlaceImage.value};
     initialCarts.unshift(newObj);
 
-    addCart (initialCarts[0], 'prepend');
+    renderCartsByUser();
     togglePopupCreater();
 
     popupPlaceName.value = '';

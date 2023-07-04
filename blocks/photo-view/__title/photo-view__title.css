@@ -9,6 +9,7 @@
     font-size: 12px;
     line-height: normal;
     font-weight: 400;
+    max-width: 288px;
     color: #fff;
     margin: 0;
     text-overflow: ellipsis;

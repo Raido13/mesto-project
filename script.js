@@ -10,6 +10,7 @@ const userEditDescription = document.querySelector('.popup__field_user_descripti
 function openPopupUser (){
     popup.classList.add('popup_opened');
 }
+
 function closePopupUser (){
     userEditName.value = '';
     userEditDescription.value = '';
@@ -26,8 +27,10 @@ const popupUserForm = document.querySelector('.popup__form');
 
 function submitPopupUserForm(evt){
     evt.preventDefault();
+
     userName.textContent = userEditName.value;
     userDescription.textContent = userEditDescription.value;
+
     closePopupUser();
 }
 
@@ -81,9 +84,7 @@ function renderCarts (item){
 
     cartLikeButton.addEventListener('click', evt=> cartLikeButton.classList.toggle('carts__button-like_active'));
 
-    cartTrashButton.addEventListener('click', evt=> {
-        deleteCart(item);
-    });
+    cartTrashButton.addEventListener('click', evt=> deleteCart(item));
 
     cartImage.addEventListener('click', evt=>{
         const photoView = document.querySelector('.photo-view');        
@@ -128,8 +129,8 @@ const popupPlaceImage = document.querySelector('.popup-creater__field_place_imag
 
 function submitPopupPlaceForm(evt){
     evt.preventDefault();
-    const newObj = {name: popupPlaceName.value, imgLink: popupPlaceImage.value};
-    initialCarts.unshift(newObj);
+
+    initialCarts.unshift({name: popupPlaceName.value, imgLink: popupPlaceImage.value});
 
     renderCartsByUserAction();
     togglePopupCreater();

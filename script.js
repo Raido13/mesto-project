@@ -12,8 +12,6 @@ function openPopupUser (){
 }
 
 function closePopupUser (){
-    userEditName.value = '';
-    userEditDescription.value = '';
     popup.classList.remove('popup_opened');
 }
 

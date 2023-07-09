@@ -29,33 +29,33 @@
         <footer class="footer">
             <p class="footer__copyright" lang="en">&COPY; 2023 Mesto Russia</p>
         </footer>
-        <div class="popup">
+        <div class="popup popup_type_edit">
             <div class="popup__container">
-                <button class="popup__button-close" type="button"></button>
+                <button class="popup__button-close popup__button-close_type_edit" type="button"></button>
                 <h2 class="popup__title">Редактировать профиль</h2>
-                <form class="popup__form" name="userEdition">
+                <form class="popup__form popup__form_type_edit" name="userEdition">
                     <input type="text" placeholder="Имя пользователя" class="popup__field popup__field_user_name" name="userName">
                     <input type="text" placeholder="Описание пользователя" class="popup__field  popup__field_user_description" name="userDescription">
                     <button type="submit" class="popup__button-save">Сохранить</button>
                 </form>
             </div>
         </div>
-        <div class="popup-creater">
-            <div class="popup-creater__container">
-                <button class="popup-creater__button-close" type="button"></button>
-                <h2 class="popup-creater__title">Новое место</h2>
-                <form class="popup-creater__form" name="cartAdd">
-                    <input type="text" placeholder="Название" class="popup-creater__field popup-creater__field_place_name" name="placeName">
-                    <input type="text" placeholder="Ссылка на картинку" class="popup-creater__field  popup-creater__field_place_image" name="placeImage">
-                    <button type="submit" class="popup-creater__button-create">Создать</button>
+        <div class="popup popup_type_place">
+            <div class="popup__container">
+                <button class="popup__button-close popup__button-close_type_place" type="button"></button>
+                <h2 class="popup__title">Новое место</h2>
+                <form class="popup__form popup__form_place_form" name="cartAdd">
+                    <input type="text" placeholder="Название" class="popup__field popup__field_place_name" name="placeName">
+                    <input type="text" placeholder="Ссылка на картинку" class="popup__field  popup__field_place_image" name="placeImage">
+                    <button type="submit" class="popup__button-save">Создать</button>
                 </form>
             </div>
         </div>
-        <div class="photo-view">
-            <div class="photo-view__container">
-                <button class="photo-view__button-close" type="button"></button>
-                <img class="photo-view__image">
-                <h2 class="photo-view__title"></h2>
+        <div class="popup popup_type_image popup_image">
+            <div class="popup__container_image">
+                <button class="popup__button-close popup__button-close_type_image" type="button"></button>
+                <img class="popup__image">
+                <h2 class="popup__title_image"></h2>
             </div>
         </div>
     </div>

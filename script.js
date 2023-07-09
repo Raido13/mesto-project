@@ -79,7 +79,7 @@ function submitUserEditForm(evt){
     closePopup(popupEdit);
 }
 
-popupEdit.addEventListener('submit', submitUserEditForm);
+popupEditForm.addEventListener('submit', submitUserEditForm);
 
 function deleteCart(cart){
     cart.remove();
@@ -93,7 +93,7 @@ function viewPhoto(image){
     popupImageTitle.textContent = image.name;
     popupImagePhoto.src = image.imgLink;
     popupImagePhoto.alt = image.name;
-    
+
     openPopup(popupImage);
 }
 

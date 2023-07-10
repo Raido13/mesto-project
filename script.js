@@ -17,61 +17,37 @@ const popupPlaceImage = document.querySelector('.popup__field_place_image');
 
 const carts = document.querySelector('.carts');
 
-const initialCarts = [
-    {
-        name: 'Карачаевск',
-        imgLink: 'images/carts__church@2x.jpg'
-    },
-    {
-        name: 'Гора Эльбрус',
-        imgLink: 'images/carts__hill@2x.jpg'
-    },
-    {
-        name: 'Домбай',
-        imgLink: 'images/carts__mountain@2x.jpg'
-    },
-    {
-        name: 'Гора Эльбрус',
-        imgLink: 'images/carts__hill@2x.jpg'
-    },
-    {
-        name: 'Домбай',
-        imgLink: 'images/carts__mountain@2x.jpg'
-    },
-    {
-        name: 'Карачаево-Черкессия',
-        imgLink: 'images/carts__church@2x.jpg'
-    },
-]
-
 const popupImage = document.querySelector('.popup_type_image');
 const popupImageClose = document.querySelector('.popup__button-close_type_image');
 const popupImagePhoto = document.querySelector('.popup__image');
 const popupImageTitle = document.querySelector('.popup__title_image');
 
-popupEditName.value = profileName.textContent;
-popupEditDescription.value = profileDescription.textContent;
-
-function openPopup(popup){
+function openPopup(popup) {
     popup.classList.add('popup_opened');
 }
 
-function closePopup(popup){
+function closePopup(popup) {
     popup.classList.remove('popup_opened');
-    if (popup == popupPlace){
-        popupPlaceName.value = '';
-        popupPlaceImage.value = '';
-    }
 }
 
-profileEditButton.addEventListener('click', evt=> openPopup(popupEdit));
-profileAddButton.addEventListener('click', evt=> openPopup(popupPlace));
-popupEditClose.addEventListener('click', evt=> closePopup(popupEdit));
-popupPlaceClose.addEventListener('click', evt=> closePopup(popupPlace));
-popupImageClose.addEventListener('click', evt=> closePopup(popupImage));
+profileEditButton.addEventListener('click', () => {
+    popupEditName.value = profileName.textContent;
+    popupEditDescription.value = profileDescription.textContent;
 
-function submitUserEditForm(evt){
-    evt.preventDefault();
+    openPopup(popupEdit);
+});
+profileAddButton.addEventListener('click', () => {
+    popupPlaceName.value = '';
+    popupPlaceImage.value = '';
+
+    openPopup(popupPlace);
+});
+popupEditClose.addEventListener('click', () => closePopup(popupEdit));
+popupPlaceClose.addEventListener('click', () => closePopup(popupPlace));
+popupImageClose.addEventListener('click', () => closePopup(popupImage));
+
+function submitUserEditForm(e) {
+    e.preventDefault();
 
     profileName.textContent = popupEditName.value;
     profileDescription.textContent = popupEditDescription.value;
@@ -81,15 +57,11 @@ function submitUserEditForm(evt){
 
 popupEditForm.addEventListener('submit', submitUserEditForm);
 
-function deleteCart(cart){
-    cart.remove();
-}
+const deleteCart = (cart) => cart.remove();
 
-function addLike(like){
-    like.classList.toggle('carts__button-like_active');
-}
+const addLike = (like) => like.classList.toggle('carts__button-like_active');
 
-function viewPhoto(image){
+function viewPhoto(image) {
     popupImageTitle.textContent = image.name;
     popupImagePhoto.src = image.imgLink;
     popupImagePhoto.alt = image.name;
@@ -97,11 +69,9 @@ function viewPhoto(image){
     openPopup(popupImage);
 }
 
-function renderCart(cart, placement){
-    carts[placement](createCart(cart));
-}
+const renderCart = (cart) => carts.prepend(cart);
 
-function createCart(item){
+function createCart(item) {
     const cartTemplate = document.querySelector('#cart-template').content;
     const cartElement = cartTemplate.querySelector('.carts__item').cloneNode(true);
     const cartTrashButton = cartElement.querySelector('.carts__button-trash');
@@ -113,19 +83,24 @@ function createCart(item){
     cartImage.src = item.imgLink;
     cartImage.alt = item.name;
 
-    cartLikeButton.addEventListener('click', evt=> addLike(cartLikeButton));
-    cartTrashButton.addEventListener('click', evt=> deleteCart(cartElement));
-    cartImage.addEventListener('click', evt=> viewPhoto(item));
+    cartLikeButton.addEventListener('click', () => addLike(cartLikeButton));
+    cartTrashButton.addEventListener('click', () => deleteCart(cartElement));
+    cartImage.addEventListener('click', () => viewPhoto(item));
     
     return cartElement;
 }
 
-initialCarts.forEach(it => renderCart(it, 'append'));
+initialCarts.reverse().forEach(item => {
+    const cart = createCart(item);
+    renderCart(cart);
+});
 
-function submitPopupPlaceForm(evt){
-    evt.preventDefault();
+function submitPopupPlaceForm(e) {
+    e.preventDefault();
     
-    renderCart({name: popupPlaceName.value, imgLink: popupPlaceImage.value}, 'prepend');
+    const cart = createCart({name: popupPlaceName.value, imgLink: popupPlaceImage.value});
+
+    renderCart(cart);
     closePopup(popupPlace);
 }
 

@@ -1,5 +1,6 @@
-import {closePopup, profileName, profileDescription, popupPlace, popupEdit, popupEditName, popupEditDescription, popupPlaceName, popupPlaceImage} from './utils';
-import {createCart, renderCart} from './carts';
+import {closePopup, profileName, profileDescription, popupPlace, popupEdit, popupEditName, popupEditDescription, popupPlaceName, popupPlaceImage} from './modals';
+import {createCart} from './carts';
+import {renderCart} from './index';
 
 export const resetInputValidity = popup => {
     Array.from(popup.querySelectorAll('.popup__field')).forEach(input => {

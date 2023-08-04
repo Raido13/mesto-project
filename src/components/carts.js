@@ -1,15 +1,10 @@
-import {initialCarts} from './dataCarts';
-import {openPopup, popupImage, popupImageTitle, popupImagePhoto} from './utils';
+import {openPopup, popupImage, popupImageTitle, popupImagePhoto} from './modals';
 
-export const carts = document.querySelector('.carts');
+const deleteCart = cart => cart.remove();
 
-export const deleteCart = cart => cart.remove();
+const addLike = like => like.classList.toggle('carts__button-like_active');
 
-export const addLike = like => like.classList.toggle('carts__button-like_active');
-
-export const renderCart = cart => carts.prepend(cart);
-
-export const viewPhoto = image => {
+const viewPhoto = image => {
     popupImageTitle.textContent = image.name;
     popupImagePhoto.src = image.imgLink;
     popupImagePhoto.alt = image.name;
@@ -35,8 +30,3 @@ export function createCart(item) {
     
     return cartElement;
 }
-
-initialCarts.reverse().forEach(item => {
-    const cart = createCart(item);
-    renderCart(cart);
-});

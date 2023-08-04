@@ -11,7 +11,7 @@
     cursor: pointer;
     border: none;
     border-radius: 2px;
-    grid-row: 6;
+    grid-row: 8;
 }
 
 .popup__button-save:hover {

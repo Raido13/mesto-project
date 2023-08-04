@@ -16,9 +16,9 @@
     font-size: 14px;
     line-height: 17px;
     font-weight: 400;
-    color: #000;
+    color: #C4C4C4;
 }
 
-.popup__field:nth-child(2){
-    grid-row: 4;
+.popup__field:nth-child(3) {
+    grid-row: 5;
 }

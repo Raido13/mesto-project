@@ -5,18 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Место</title>
-    <link rel="stylesheet" href="pages/index.css">
-    <script src="dataCarts.js" defer></script>
-    <script src="script.js" defer></script>
 </head>
 <body class="root">
     <div class="page">
         <header class="header">
-            <img src="images/header__logo.svg" alt="Место" class="header__logo">
+            <img src="<%=require('./images/header__logo.svg')%>" alt="Место" class="header__logo">
         </header>
         <main class="content">
             <section class="profile">
-                <img src="images/avatar__default@2x.jpg" alt="Имя пользователя" class="profile__avatar">
+                <img src="<%=require('./images/avatar__default@2x.jpg')%>" alt="Имя пользователя" class="profile__avatar">
                 <div class="profile__info">
                     <h1 class="profile__name">Жак-Ив Кусто</h1>
                     <button class="profile__button-edit" type="button"></button>
@@ -35,8 +32,10 @@
                 <button class="popup__button-close popup__button-close_type_edit" type="button"></button>
                 <h2 class="popup__title">Редактировать профиль</h2>
                 <form class="popup__form popup__form_type_edit" name="userEdition">
-                    <input type="text" placeholder="Имя пользователя" class="popup__field popup__field_user_name" name="userName">
-                    <input type="text" placeholder="Описание пользователя" class="popup__field  popup__field_user_description" name="userDescription">
+                    <input type="text" placeholder="Имя пользователя" minlength="2" maxlength="40" pattern="^[a-zA-Zа-яА-ЯёЁ\s\-]+$" id="name-input" class="popup__field popup__field_user_name" name="userName" required data-error-message ='Разрешены только кириллические и латинские буквы, пробел и дефис.'>
+                    <span class="name-input-error popup__field-error"></span>
+                    <input type="text" placeholder="Описание пользователя" minlength="2" maxlength="200" pattern="^[a-zA-Zа-яА-ЯёЁ\s\-]+$" id="description-input" class="popup__field  popup__field_user_description" name="userDescription" required data-error-message ='Разрешены только кириллические и латинские буквы, пробел и дефис.'>
+                    <span class="description-input-error popup__field-error"></span>
                     <button type="submit" class="popup__button-save">Сохранить</button>
                 </form>
             </div>
@@ -45,9 +44,11 @@
             <div class="popup__container">
                 <button class="popup__button-close popup__button-close_type_place" type="button"></button>
                 <h2 class="popup__title">Новое место</h2>
-                <form class="popup__form popup__form_place_form" name="cartAdd">
-                    <input type="text" placeholder="Название" class="popup__field popup__field_place_name" name="placeName">
-                    <input type="text" placeholder="Ссылка на картинку" class="popup__field  popup__field_place_image" name="placeImage">
+                <form class="popup__form popup__form_type_place" name="cartAdd">
+                    <input type="text" placeholder="Название" minlength="2" maxlength="30" pattern="^[a-zA-Zа-яА-ЯёЁ\s\-]+$" id="place-input" class="popup__field popup__field_place_name" name="placeName" required data-error-message ='Разрешены только кириллические и латинские буквы, пробел и дефис.'>
+                    <span class="place-input-error popup__field-error"></span>
+                    <input type="url" placeholder="Ссылка на картинку" id="image-input" pattern="https?:\/\/.*" class="popup__field  popup__field_place_image" name="placeImage" required data-error-message='Разрешены только ссылки, начните вводить &#34http://&#34 или &#34https://&#34'>
+                    <span class="image-input-error popup__field-error"></span>
                     <button type="submit" class="popup__button-save">Создать</button>
                 </form>
             </div>

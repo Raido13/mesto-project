@@ -1,5 +1,3 @@
-const popupsArr = Array.from(document.querySelectorAll('.popup'));
-
 export const profileName = document.querySelector('.profile__name');
 export const profileDescription = document.querySelector('.profile__description');
 
@@ -16,9 +14,8 @@ export const popupImagePhoto = document.querySelector('.popup__image');
 export const popupImageTitle = document.querySelector('.popup__title_image');
 
 const eventHandler = e => {
-    const popup = popupsArr.find(popup => {return popup.classList.contains('popup_opened')})
-    if(e.key === 'Escape') closePopup(popup);
-    if(e.type === 'mousedown' && (!e.target.closest('.popup__container') && !e.target.closest('.popup__container_image'))) closePopup(popup);
+    if(e.key === 'Escape') closePopup(document.querySelector('.popup_opened'));
+    if(e.type === 'mousedown' && (!e.target.closest('.popup__container') && !e.target.closest('.popup__container_image'))) closePopup(document.querySelector('.popup_opened'));
 }
 
 export const openPopup = popup => {

@@ -18,9 +18,11 @@ export const popupDelete = document.querySelector('.popup_type_delete');
 export const popupAvatar = document.querySelector('.popup_type_avatar');
 export const popupAvatarLink = document.querySelector('.popup__field_avatar');
 
+export const popupCloseBtns = Array.from(document.querySelectorAll('.popup__button-close'));
+
 const eventHandler = e => {
     if(e.key === 'Escape') closePopup(document.querySelector('.popup_opened'));
-    if(e.type === 'mousedown' && (!e.target.closest('.popup__container') && !e.target.closest('.popup__container_image'))) closePopup(document.querySelector('.popup_opened'));
+    if(e.type === 'mousedown' && (!e.target.closest('.popup__container') && !e.target.closest('.popup__container_image'))) closePopup(e.target);
 }
 
 export const openPopup = popup => {

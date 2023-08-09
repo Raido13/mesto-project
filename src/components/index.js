@@ -1,19 +1,19 @@
 import '../pages/index.css';
 import {enableValidation, resetInputValidity, toggleButtonState} from './validate';
-import {openPopup, closePopup, popupEditName, popupEditDescription, popupPlaceName, popupPlaceImage, profileName, profileDescription, popupEdit, popupImage, popupPlace, popupAvatar, popupDelete} from './modals';
+import {openPopup, closePopup, popupCloseBtns, popupEditName, popupEditDescription, profileName, profileDescription, popupEdit, popupPlace, popupAvatar} from './modals';
 import {getUserInfo, getCarts} from './api';
-
+import {checkResponse} from './utils';
+import {createCart} from './carts';
 
 const profileEditButton = document.querySelector('.profile__button-edit');
 const profileAddButton = document.querySelector('.profile__button-add');
 export const profileAvatar = document.querySelector('.profile__avatar');
-const popupEditClose = document.querySelector('.popup__button-close_type_edit');
-const popupPlaceClose = document.querySelector('.popup__button-close_type_place');
-const popupImageClose = document.querySelector('.popup__button-close_type_image');
-const popupAvatarClose = document.querySelector('.popup__button-close_type_avatar');
-const popupDeleteClose = document.querySelector('.popup__button-close_type_delete');
 
 const carts = document.querySelector('.carts');
+
+popupCloseBtns.forEach(btn => {
+    btn.addEventListener('click', () => closePopup(btn.closest('.popup')));
+})
 
 profileEditButton.addEventListener('click', () => {
     popupEditName.value = profileName.textContent;
@@ -26,8 +26,7 @@ profileEditButton.addEventListener('click', () => {
 });
 
 profileAddButton.addEventListener('click', () => {
-    popupPlaceName.value = '';
-    popupPlaceImage.value = '';
+    popupPlace.querySelector('.popup__form').reset();
 
     resetInputValidity(popupPlace);
     toggleButtonState(Array.from(popupPlace.querySelectorAll('.popup__field')), popupPlace.querySelector('.popup__button-save'), {inactiveButtonClass: 'popup__button-save_disabled'});
@@ -42,16 +41,6 @@ profileAvatar.addEventListener('click', () => {
     openPopup(popupAvatar);
 })
 
-popupEditClose.addEventListener('click', () => closePopup(popupEdit));
-
-popupPlaceClose.addEventListener('click', () => closePopup(popupPlace));
-
-popupImageClose.addEventListener('click', () => closePopup(popupImage));
-
-popupAvatarClose.addEventListener('click', () => closePopup(popupAvatar));
-
-popupDeleteClose.addEventListener('click', () => closePopup(popupDelete));
-
 export const renderCart = cart => carts.prepend(cart);
 
 enableValidation({
@@ -63,8 +52,20 @@ enableValidation({
 });
 
 export const storage = {
+    userID: '',
     deleteElem: []
 };
 
-getUserInfo();
-getCarts();
+Promise.all([getUserInfo(), getCarts()])
+.then(res => {
+    return Promise.all(res.map(checkResponse))
+})
+.then(([user, carts]) => {
+    profileAvatar.style.cssText += `background-image: url('${user.avatar}');`;
+    profileName.textContent = user.name;
+    profileDescription.textContent = user.about;
+    storage.userID = user._id;
+    console.log(carts, user._id);
+    carts.reverse().forEach(elem => {const cart = createCart(elem); renderCart(cart)})
+})
+.catch(error => console.log(error));

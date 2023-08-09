@@ -1,6 +1,7 @@
 import {storage} from './index';
 import {openPopup, popupImage, popupImageTitle, popupImagePhoto, popupDelete} from './modals';
-import {changeLike, userID, deleteUserCart} from './api';
+import {changeLike, deleteUserCart} from './api';
+import {checkResponse} from './utils';
 
 export const deleteCart = (cart, cartElement, submited) => {
     if(!submited) {
@@ -8,19 +9,22 @@ export const deleteCart = (cart, cartElement, submited) => {
         openPopup(popupDelete);
     }
     if(submited) {
-        deleteUserCart(storage.deleteElem);
+        return deleteUserCart(storage.deleteElem[0]);
     }
 };
 
 export const toggleLikeState = (cart, cartLikeButton, cartLikeCounter) => {
-    const condition = cart.likes.find(like => like._id == userID);
+    const condition = cart.likes.find(like => like._id == storage.userID);
     (condition ? cartLikeButton.classList.add('carts__button-like_active') : cartLikeButton.classList.remove('carts__button-like_active'));
     cartLikeCounter.textContent = cart.likes.length;
 }
 
 const toggleLike = (cart, cartLikeButton, cartLikeCounter) => {
     const condition = cartLikeButton.classList.contains('carts__button-like_active');
-    changeLike(cart, cartLikeButton, cartLikeCounter, condition);
+    changeLike(cart, condition)
+    .then(checkResponse)
+    .then(cart => {toggleLikeState(cart, cartLikeButton, cartLikeCounter)})
+    .catch(error => console.log(error))
 }
 
 const viewPhoto = image => {
@@ -40,8 +44,7 @@ export function createCart(cart) {
     const cartTitle = cartElement.querySelector('.carts__title');
     const cartImage = cartElement.querySelector('.carts__image');
     
-    
-    if(cart.owner._id != userID) cartTrashButton.classList.add('carts__button-trash_hide');
+    if(cart.owner._id != storage.userID) cartTrashButton.classList.add('carts__button-trash_hide');
 
     cartTitle.textContent = cart.name;
     cartImage.src = cart.link;

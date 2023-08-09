@@ -1,0 +1,10 @@
+.carts__container-like {
+    height: 35px;
+    width: 22px;
+    grid-row: 2;
+    grid-column: 3;
+    display: grid;
+    grid-template-rows: 19px 13px;
+    row-gap: 3px;
+    justify-items: center;
+}

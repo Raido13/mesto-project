@@ -16,8 +16,11 @@
 @import url(../blocks/carts/__item/carts__item.css);
 @import url(../blocks/carts/__image/carts__image.css);
 @import url(../blocks/carts/__button-trash/carts__button-trash.css);
+@import url(../blocks/carts/__button-trash/_hide/carts__button-trash_hide.css);
 @import url(../blocks/carts/__title/carts__title.css);
+@import url(../blocks/carts/__container-like/carts__container-like.css);
 @import url(../blocks/carts/__button-like/carts__button-like.css);
+@import url(../blocks/carts/__like-counter/carts__like-counter.css);
 @import url(../blocks/carts/__button-like/_active/carts__button-like_active.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
@@ -30,6 +33,8 @@
 @import url(../blocks/popup/__title/_image/popup__title-image.css);
 @import url(../blocks/popup/__image/popup__image.css);
 @import url(../blocks/popup/__form/popup__form.css);
+@import url(../blocks/popup/__form/_avatar/popup__form_avatar.css);
+@import url(../blocks/popup/__form/_delete/popup__form_delete.css);
 @import url(../blocks/popup/__field/popup__field.css);
 @import url(../blocks/popup/__field/_invalid/popup__field_invalid.css);
 @import url(../blocks/popup/__field-error/popup__field-error.css);

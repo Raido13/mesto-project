@@ -1,6 +1,6 @@
-import {closePopup, profileName, profileDescription, popupPlace, popupEdit, popupEditName, popupEditDescription, popupPlaceName, popupPlaceImage} from './modals';
-import {createCart} from './carts';
-import {renderCart} from './index';
+import {closePopup} from './modals';
+import {editUser, addNewCart, changeAvatar} from './api';
+import {deleteCart} from './carts';
 
 export const resetInputValidity = popup => {
     Array.from(popup.querySelectorAll('.popup__field')).forEach(input => {
@@ -56,16 +56,27 @@ export const enableValidation = ({formSelector, ...settings}) => {
     })
 }
 
+export const loadingOnBtn = (targetBtnText, state) => {
+    const defaultBtnText = targetBtnText;
+    const stateBtnText = 'Сохранение...';
+    (state ? targetBtnText = stateBtnText : targetBtnText = defaultBtnText);
+}
+
 function submitForm(e) {
     e.preventDefault();
+    const targetBtnText = e.target.querySelector('.popup__button-save').textContent;
+
     if(e.target.classList.contains('popup__form_type_edit')){
-        profileName.textContent = popupEditName.value;
-        profileDescription.textContent = popupEditDescription.value;
-        closePopup(popupEdit);
+        editUser(targetBtnText);
     }
     if(e.target.classList.contains('popup__form_type_place')){
-        const cart = createCart({name: popupPlaceName.value, imgLink: popupPlaceImage.value});
-        renderCart(cart);
-        closePopup(popupPlace);
+        addNewCart(targetBtnText);
     }
+    if(e.target.classList.contains('popup__form_type_delete')){
+        deleteCart(false, false, true);
+    }
+    if(e.target.classList.contains('popup__form_type_avatar')){
+        changeAvatar(targetBtnText);
+    }
+    closePopup(document.querySelector('.popup_opened'));
 }

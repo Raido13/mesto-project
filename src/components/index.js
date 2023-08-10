@@ -65,7 +65,6 @@ Promise.all([getUserInfo(), getCarts()])
     profileName.textContent = user.name;
     profileDescription.textContent = user.about;
     storage.userID = user._id;
-    console.log(carts, user._id);
     carts.reverse().forEach(elem => {const cart = createCart(elem); renderCart(cart)})
 })
 .catch(error => console.log(error));

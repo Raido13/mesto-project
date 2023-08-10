@@ -61,8 +61,7 @@ export const enableValidation = ({formSelector, ...settings}) => {
 
 export const loadingOnBtn = (targetBtnText, state) => {
     const defaultBtnText = targetBtnText;
-    const stateBtnText = 'Сохранение...';
-    (state ? targetBtnText = stateBtnText : targetBtnText = defaultBtnText);
+    (state ? targetBtnText = 'Сохранение...' : targetBtnText = defaultBtnText);
 }
 
 function submitForm(e) {

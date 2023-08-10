@@ -1,9 +1,4 @@
-import {closePopup} from './modals';
-import {editUser, addNewCart, changeAvatar} from './api';
-import {deleteCart, createCart} from './carts';
-import {profileName, profileDescription, popupAvatarLink} from './modals';
-import {profileAvatar, renderCart, storage} from './index';
-import {checkResponse} from './utils';
+import {submitForm} from './index'
 
 export const resetInputValidity = popup => {
     Array.from(popup.querySelectorAll('.popup__field')).forEach(input => {
@@ -59,75 +54,4 @@ export const enableValidation = ({formSelector, ...settings}) => {
     })
 }
 
-export const loadingOnBtn = (targetBtnText, state) => {
-    const defaultBtnText = targetBtnText;
-    (state ? targetBtnText = 'Сохранение...' : targetBtnText = defaultBtnText);
-}
-
-function submitForm(e) {
-    e.preventDefault();
-    const targetBtnText = e.submitter.textContent;
-
-    if(e.target.classList.contains('popup__form_type_edit')) {
-        editUser()
-        .then(res => {
-            loadingOnBtn(targetBtnText, true);
-            return checkResponse(res)
-        })
-        .then(data => {
-            loadingOnBtn(targetBtnText, false);
-            profileName.textContent = data.name;
-            profileDescription.textContent = data.about;
-            closePopup(document.querySelector('.popup_opened'));
-        })
-        .catch(error => {
-            loadingOnBtn(targetBtnText, false);
-            console.log(error);
-        })
-    }
-    if(e.target.classList.contains('popup__form_type_place')) {
-        addNewCart()
-        .then(res => {
-            loadingOnBtn(targetBtnText, true);
-            return checkResponse(res)
-        })
-        .then(data => {
-            loadingOnBtn(targetBtnText, false);
-            const newCart = createCart(data);
-            renderCart(newCart);
-            closePopup(document.querySelector('.popup_opened'));
-        })
-        .catch(error => {
-            loadingOnBtn(targetBtnText, false);
-            console.log(error);
-        })
-    }
-    if(e.target.classList.contains('popup__form_type_delete')) {
-        deleteCart(false, false, true)
-        .then(checkResponse)
-        .then(() => {
-            storage.deleteElem[1].remove();
-            closePopup(document.querySelector('.popup_opened'));
-        })
-        .catch(error => {
-            console.log(error);
-        })
-    }
-    if(e.target.classList.contains('popup__form_type_avatar')) {
-        changeAvatar()
-        .then(res => {
-            loadingOnBtn(targetBtnText, true);
-            return checkResponse(res)
-        })
-        .then(data => {
-            loadingOnBtn(targetBtnText, false);
-            profileAvatar.style.cssText += `background-image: url('${data.avatar}');`;
-            popupAvatarLink.value = ''
-            closePopup(document.querySelector('.popup_opened'));
-        })
-        .catch(error => {
-            loadingOnBtn(targetBtnText, false);
-            console.log(error)
-        })
-    }
-}
+export const loadingOnBtn = (targetBtn, defaultBtnText, state) => (state ? targetBtn.textContent = 'Сохранение...' : targetBtn.textContent = defaultBtnText)

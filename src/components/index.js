@@ -1,9 +1,9 @@
 import '../pages/index.css';
-import {enableValidation, resetInputValidity, toggleButtonState} from './validate';
-import {openPopup, closePopup, popupCloseBtns, popupEditName, popupEditDescription, profileName, profileDescription, popupEdit, popupPlace, popupAvatar} from './modals';
-import {getUserInfo, getCarts} from './api';
+import {enableValidation, resetInputValidity, toggleButtonState, loadingOnBtn} from './validate';
+import {openPopup, closePopup, popupCloseBtns, popupEditName, popupEditDescription, profileName, profileDescription, popupEdit, popupPlace, popupAvatar, popupAvatarLink} from './modals';
+import {getUserInfo, getCarts, editUser, addNewCart, changeAvatar} from './api';
 import {checkResponse} from './utils';
-import {createCart} from './carts';
+import {deleteCart, createCart} from './carts';
 
 const profileEditButton = document.querySelector('.profile__button-edit');
 const profileAddButton = document.querySelector('.profile__button-add');
@@ -40,6 +40,75 @@ profileAvatar.addEventListener('click', () => {
 
     openPopup(popupAvatar);
 })
+
+export const submitForm = e => {
+    e.preventDefault();
+    const targetBtn = e.submitter;
+    const defaultBtnText = targetBtn.textContent;
+
+    if(e.target.classList.contains('popup__form_type_edit')) {
+        editUser()
+        .then(res => {
+            loadingOnBtn(targetBtn, defaultBtnText, true);
+            return checkResponse(res)
+        })
+        .then(data => {
+            loadingOnBtn(targetBtn, defaultBtnText, false);
+            profileName.textContent = data.name;
+            profileDescription.textContent = data.about;
+            closePopup(document.querySelector('.popup_opened'));
+        })
+        .catch(error => {
+            loadingOnBtn(targetBtn, defaultBtnText, false);
+            console.log(error);
+        })
+    }
+    if(e.target.classList.contains('popup__form_type_place')) {
+        addNewCart()
+        .then(res => {
+            loadingOnBtn(targetBtn, defaultBtnText, true);
+            return checkResponse(res)
+        })
+        .then(data => {
+            loadingOnBtn(targetBtn, defaultBtnText, false);
+            const newCart = createCart(data);
+            renderCart(newCart);
+            closePopup(document.querySelector('.popup_opened'));
+        })
+        .catch(error => {
+            loadingOnBtn(targetBtn, defaultBtnText, false);
+            console.log(error);
+        })
+    }
+    if(e.target.classList.contains('popup__form_type_delete')) {
+        deleteCart(false, false, true)
+        .then(checkResponse)
+        .then(() => {
+            storage.deleteElem[1].remove();
+            closePopup(document.querySelector('.popup_opened'));
+        })
+        .catch(error => {
+            console.log(error);
+        })
+    }
+    if(e.target.classList.contains('popup__form_type_avatar')) {
+        changeAvatar()
+        .then(res => {
+            loadingOnBtn(targetBtn, defaultBtnText, true);
+            return checkResponse(res)
+        })
+        .then(data => {
+            loadingOnBtn(targetBtn, defaultBtnText, false);
+            profileAvatar.style.cssText += `background-image: url('${data.avatar}');`;
+            popupAvatarLink.value = ''
+            closePopup(document.querySelector('.popup_opened'));
+        })
+        .catch(error => {
+            loadingOnBtn(targetBtn, defaultBtnText, false);
+            console.log(error)
+        })
+    }
+}
 
 export const renderCart = cart => carts.prepend(cart);
 

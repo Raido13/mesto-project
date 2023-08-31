@@ -1,11 +1,16 @@
 {
   "name": "mesto-project",
   "version": "1.0.0",
-  "description": "<h1 align=\"center\">Четвертая проектная работа:</h1>\r <h3 align=\"center\">Реализация функциональности проекта «Mesto» на JavaScript</h3>",
+  "repository": {
+    "url": "git+https://github.com/raido13/mesto-project.git"
+  },
+  "description": "<h1 align=\"center\">Шестая проектная работа:</h1>\r <h3 align=\"center\">Взаимодействие с сервером проекта «Mesto» на JavaScript</h3>",
   "main": "dataCarts.js",
   "scripts": {
     "build": "webpack --mode production",
-    "dev": "webpack serve"
+    "dev": "webpack serve",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "keywords": [],
   "author": "",
@@ -18,6 +23,7 @@
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.8.1",
     "cssnano": "^6.0.1",
+    "gh-pages": "^6.0.0",
     "html-webpack-plugin": "^5.5.3",
     "mini-css-extract-plugin": "^2.7.6",
     "postcss-loader": "^7.3.3",

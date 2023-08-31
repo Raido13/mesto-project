@@ -1,37 +1,84 @@
-import {popupEditName, popupEditDescription, popupPlaceName, popupPlaceImage, popupAvatarLink} from './modals';
+export default class Api {
+    #baseUrl;
+    #headers;
 
-export const api = {
-    url: 'https://nomoreparties.co/v1/plus-cohort-27',
-    headers: {
-        authorization: '7b8fe31e-898f-4c7d-9582-d2cac788919d',
-        'Content-Type': 'application/json'
+    #onResponse(res) {
+        return res.ok
+            ? res.json()
+            : res.json()
+                .then(data => {
+                    Promise.reject(data.message)
+                })
     }
-}
 
-export const getCarts = () => {
-    return fetch(api.url + '/cards', {headers: api.headers})
-}
+    #request(endpointUrl, options) {
+        return fetch(`${this.#baseUrl}${endpointUrl}`, options)
+            .then(this.#onResponse)
+    }
 
-export const getUserInfo = () => {
-    return fetch(api.url + '/users/me', {headers: api.headers})
-}
+    constructor(config) {
+        this.#baseUrl = config.baseUrl;
+        this.#headers = config.headers;
+    }
 
-export const editUser = () => {
-    return fetch(api.url + '/users/me', {method: 'PATCH', headers: api.headers, body: JSON.stringify({name: popupEditName.value, about: popupEditDescription.value})})
-}
+    getCarts() {
+        return this.#request('/cards', {
+            headers: this.#headers
+        })
+    }
 
-export const addNewCart = () => {
-    return fetch(api.url + '/cards', {method: 'POST', headers: api.headers, body: JSON.stringify({name: popupPlaceName.value, link: popupPlaceImage.value})})
-}
+    getUserInfo() {
+        return this.#request('/users/me', {
+            headers: this.#headers
+        })
+    }
 
-export const deleteUserCart = cart => {
-    return fetch(api.url + `/cards/${cart._id}`, {method: 'DELETE', headers: api.headers})
-}
+    editUser(data) {
+        return this.#request('/users/me', {
+            method: 'PATCH',
+            headers: this.#headers,
+            body: JSON.stringify({
+                name: data.name,
+                about: data.about    
+            })
+        })
+    }
 
-export const changeAvatar = () => {
-    return fetch(api.url + '/users/me/avatar', {method: 'PATCH', headers: api.headers, body: JSON.stringify({avatar: popupAvatarLink.value})})
-}
+    addNewCart(data) {
+        return this.#request('/cards', {
+            method: 'POST',
+            headers: this.#headers,
+            body: JSON.stringify({
+                name: data.name, 
+                link: data.link
+            })
+        })
+    }
 
-export const changeLike = (cart, condition) => {
-    return fetch(api.url + `/cards/likes/${cart._id}`, {method: condition ? 'DELETE' : 'PUT', headers: api.headers})
+    deleteUserCart(cartId) {
+        return this.#request(`/cards/${cartId}`, {
+            method: 'DELETE',
+            headers: this.#headers
+        })
+    }
+
+    updateAvatar(data) {
+        console.log(data);
+        return this.#request('/users/me/avatar', {
+            method: 'PATCH',
+            headers: this.#headers,
+            body: JSON.stringify({
+                avatar: data.link
+            })
+        })
+    }
+
+    updateLike(cartId, condition) {
+        return this.#request(`/cards/likes/${cartId}`, {
+            method: condition
+                        ? 'DELETE'
+                        : 'PUT',
+            headers: this.#headers
+        })
+    }
 }
